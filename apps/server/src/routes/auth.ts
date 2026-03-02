@@ -1,7 +1,6 @@
 import type { FastifyInstance } from 'fastify';
 import { z } from 'zod';
 import { firebaseService } from '../services/firebaseService.js';
-import { emailService } from '../services/emailService.js';
 import type { User } from '@aurix/types';
 
 const registerSchema = z.object({
@@ -42,8 +41,8 @@ export async function authRoutes(fastify: FastifyInstance): Promise<void> {
 
       const user = await firebaseService.createUser(newUser);
       
-      // Send welcome email
-      await emailService.sendWelcomeEmail(user.email, user);
+      // Log successful registration (in-app only)
+      console.log(`✅ New user registered: ${user.email}`);
 
       return reply.send({
         success: true,

@@ -418,7 +418,7 @@
                 </div>
                 <div class="feature-card">
                     <h4>🔔 Smart Alerts</h4>
-                    <p>Condition-based notifications with email support</p>
+                    <p>Condition-based notifications (in-app)</p>
                 </div>
             </div>
 
@@ -498,11 +498,6 @@
                     <td>Google AI Studio</td>
                     <td>Gemini API</td>
                     <td>60 requests/minute</td>
-                </tr>
-                <tr>
-                    <td>Resend</td>
-                    <td>Email delivery</td>
-                    <td>100 emails/day</td>
                 </tr>
                 <tr>
                     <td>Groq</td>
@@ -640,13 +635,7 @@ curl http://localhost:3001/health
                 <li>Copy the key for your environment variables</li>
             </ol>
 
-            <h3>Resend Email Setup</h3>
-            <ol>
-                <li>Go to <a href="https://resend.com" style="color: #14B8A6;">Resend</a></li>
-                <li>Sign up and verify your domain</li>
-                <li>Generate an API key</li>
-                <li>Configure sender email (e.g., alerts@yourdomain.com)</li>
-            </ol>
+            
 
             <h3>Groq Setup (Optional)</h3>
             <ol>
@@ -697,9 +686,6 @@ UPSTASH_REDIS_TOKEN=your_redis_token
 FIREBASE_PROJECT_ID=your_project_id
 FIREBASE_CLIENT_EMAIL=firebase-adminsdk-xxxxx@your_project.iam.gserviceaccount.com
 FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
-
-# Resend Email
-RESEND_API_KEY=re_xxxxxxxx
 
 # Optional APIs
 WHALE_ALERT_API_KEY=your_whale_alert_key
@@ -760,7 +746,6 @@ Root Directory: apps/server</code></pre>
                 <li>Update CORS settings in backend with production URLs</li>
                 <li>Configure Firebase authorized domains</li>
                 <li>Verify Redis connection in production</li>
-                <li>Test email delivery with Resend</li>
                 <li>Check WebSocket connectivity</li>
                 <li>Monitor error logs in both services</li>
             </ul>
@@ -806,7 +791,7 @@ Root Directory: apps/server</code></pre>
                 <li>Go to Alerts page</li>
                 <li>Click "Create Alert"</li>
                 <li>Set conditions (e.g., BTC price > 50,000)</li>
-                <li>Receive email notifications when triggered</li>
+                <li>Receive in-app notifications when triggered</li>
             </ol>
 
             <h3>Free vs Pro Limits</h3>
@@ -1022,3 +1007,4 @@ NEXT_PUBLIC_DEBUG=true pnpm --filter @aurix/web dev</code></pre>
     </script>
 </body>
 </html>
+

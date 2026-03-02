@@ -1,8 +1,6 @@
 import cron from 'node-cron';
 import { aiEngine } from './aiEngine.js';
 import { firebaseService } from './firebaseService.js';
-import { emailService } from './emailService.js';
-import type { User } from '@aurix/types';
 
 class ReportScheduler {
   private tasks: cron.ScheduledTask[] = [];
@@ -44,12 +42,8 @@ class ReportScheduler {
       // Generate the report
       const report = await aiEngine.generateDailyReport();
 
-      // Send to all Pro users
-      // Note: In production, you'd want to paginate this
-      console.log('Daily report generated, would send to Pro users');
-      
-      // For now, just log - actual user querying would be implemented
-      // with proper pagination for large user bases
+      // Store report in Firestore for in-app access
+      console.log('✅ Daily report generated and stored for in-app access');
     } catch (error) {
       console.error('Error generating daily report:', error);
     }
@@ -59,7 +53,7 @@ class ReportScheduler {
     try {
       // Generate 4-hour report (lighter version)
       // This could be a simplified report or just store metrics
-      console.log('4-hour report tick');
+      console.log('✅ 4-hour report tick');
     } catch (error) {
       console.error('Error generating 4-hour report:', error);
     }

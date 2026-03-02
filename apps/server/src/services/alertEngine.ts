@@ -1,6 +1,5 @@
 import { firebaseService } from './firebaseService.js';
 import { redisService } from './redisService.js';
-import { emailService } from './emailService.js';
 import { evaluateConditionTree, formatSymbolForDisplay } from '@aurix/utils';
 import type { Alert, AlertConditionTree, AssetMetrics, AlertLog } from '@aurix/types';
 import type { AlertEvaluationResult } from '../types/index.js';
@@ -181,13 +180,8 @@ class AlertEngine {
       };
       await firebaseService.createAlertLog(log);
 
-      // Get user for email notification
-      const user = await firebaseService.getUser(alert.userId);
-      if (user?.email) {
-        await emailService.sendAlertEmail(user.email, alert, metrics);
-      }
-
-      console.log(`Alert triggered: ${alert.name} for ${alert.symbol}`);
+      // Log alert trigger (in-app only, no email)
+      console.log(`🚨 Alert triggered: ${alert.name} for ${alert.symbol}`);
     } catch (error) {
       console.error('Error triggering alert:', error);
     }
