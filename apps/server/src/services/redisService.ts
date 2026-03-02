@@ -1,6 +1,7 @@
 import { Redis } from 'ioredis';
 import { config } from '../config.js';
-import type { AssetMetrics, MarketDataCache } from '../types/index.js';
+import type { AssetMetrics } from '@aurix/types';
+import type { MarketDataCache } from '../types/index.js';
 
 class RedisService {
   private client: Redis | null = null;
@@ -13,7 +14,11 @@ class RedisService {
     }
 
     try {
-      this.client = new Redis(config.upstashRedisUrl, {
+      // Convert https:// to rediss:// for Upstash Redis
+      const redisUrl = config.upstashRedisUrl.replace('https://', 'rediss://');
+      
+      this.client = new Redis(redisUrl, {
+        password: config.upstashRedisToken,
         tls: { rejectUnauthorized: false },
         retryStrategy: (times) => Math.min(times * 50, 2000),
         maxRetriesPerRequest: 3,

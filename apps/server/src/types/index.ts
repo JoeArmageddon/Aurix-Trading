@@ -1,5 +1,6 @@
 import type { FastifyRequest, FastifyReply } from 'fastify';
 import type { User, UserPlan } from '@aurix/types';
+import type WebSocket from 'ws';
 
 export interface AuthenticatedRequest extends FastifyRequest {
   user: {

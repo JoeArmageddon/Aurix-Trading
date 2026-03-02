@@ -104,7 +104,7 @@ class SentimentEngine {
 
       const data: FearGreedData = response.data.data?.[0];
       if (data) {
-        this.fearGreedValue = parseInt(data.value);
+        this.fearGreedValue = parseInt(String(data.value));
         console.log(`Fear & Greed Index: ${this.fearGreedValue} (${data.value_classification})`);
       }
     } catch (error) {
@@ -327,7 +327,7 @@ class SentimentEngine {
     if (index > -1) {
       this.cacheAccessOrder.splice(index, 1);
     }
-    this.cacheAccessOrder.push(symbol);
+    this.cacheAccessOrder.push(symbol.toString());
   }
 
   getAllSentiment(): Map<string, SentimentData> {

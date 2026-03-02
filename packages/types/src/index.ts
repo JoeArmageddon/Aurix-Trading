@@ -182,6 +182,7 @@ export interface AIAnalysisRequest {
   metrics: AssetMetrics;
   historicalContext?: string;
   userPlan: UserPlan;
+  userId?: string;
 }
 
 export interface AIAnalysisResponse {

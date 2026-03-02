@@ -295,28 +295,37 @@ export function uniqueArray<T>(array: T[]): T[] {
 
 // ==================== LOCAL STORAGE UTILS (Client-side) ====================
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+declare const window: any;
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const getWindow = (): any => (typeof window !== 'undefined' ? window : undefined);
+
 export const storage = {
   get: <T>(key: string, defaultValue: T): T => {
-    if (typeof window === 'undefined') return defaultValue;
+    const w = getWindow();
+    if (!w) return defaultValue;
     try {
-      const item = window.localStorage.getItem(key);
+      const item = w.localStorage.getItem(key);
       return item ? JSON.parse(item) : defaultValue;
     } catch {
       return defaultValue;
     }
   },
   set: <T>(key: string, value: T): void => {
-    if (typeof window === 'undefined') return;
+    const w = getWindow();
+    if (!w) return;
     try {
-      window.localStorage.setItem(key, JSON.stringify(value));
+      w.localStorage.setItem(key, JSON.stringify(value));
     } catch {
       // Ignore storage errors
     }
   },
   remove: (key: string): void => {
-    if (typeof window === 'undefined') return;
+    const w = getWindow();
+    if (!w) return;
     try {
-      window.localStorage.removeItem(key);
+      w.localStorage.removeItem(key);
     } catch {
       // Ignore storage errors
     }

@@ -32,6 +32,8 @@ class OnChainEngine {
   // Recent whale alerts cache
   private recentAlerts: WhaleAlert[] = [];
   private readonly maxAlerts = 100;
+  private processingTransactions: Set<string> = new Set();
+  private alertTimestamps: Map<string, number> = new Map();
   
   // Exchange addresses cache
   private exchangeAddresses: Set<string> = new Set([

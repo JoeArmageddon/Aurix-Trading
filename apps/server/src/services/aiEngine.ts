@@ -408,31 +408,32 @@ Keep it punchy and professional. No disclaimers.`;
     try {
       const { onchainEngine } = await import('./onchainEngine.js');
       const metrics = await onchainEngine.getAllOnChainMetrics();
-    
-    const accumulationAssets = Object.entries(metrics)
-      .filter(([, m]) => m.bias === 'Accumulation')
-      .map(([s]) => s);
-    
-    const distributionAssets = Object.entries(metrics)
-      .filter(([, m]) => m.bias === 'Distribution')
-      .map(([s]) => s);
+      
+      const accumulationAssets = Object.entries(metrics)
+        .filter(([, m]) => m.bias === 'Accumulation')
+        .map(([s]) => s);
+      
+      const distributionAssets = Object.entries(metrics)
+        .filter(([, m]) => m.bias === 'Distribution')
+        .map(([s]) => s);
 
-    if (accumulationAssets.length > 0) {
-      return `Smart money accumulating in ${accumulationAssets.join(', ')}. ` +
-             (distributionAssets.length > 0 
-               ? `Distribution signals in ${distributionAssets.join(', ')}.` 
-               : 'No major outflows detected.');
-    }
+      if (accumulationAssets.length > 0) {
+        return `Smart money accumulating in ${accumulationAssets.join(', ')}. ` +
+               (distributionAssets.length > 0 
+                 ? `Distribution signals in ${distributionAssets.join(', ')}.` 
+                 : 'No major outflows detected.');
+      }
 
-    if (distributionAssets.length > 0) {
-      return `Caution: Distribution patterns in ${distributionAssets.join(', ')}.`;
-    }
+      if (distributionAssets.length > 0) {
+        return `Caution: Distribution patterns in ${distributionAssets.join(', ')}.`;
+      }
 
-    return 'On-chain flows relatively neutral today.';
+      return 'On-chain flows relatively neutral today.';
     } catch (error) {
       console.error('Error generating whale summary:', error);
       return 'On-chain data temporarily unavailable.';
     }
   }
+}
 
 export const aiEngine = new AIEngine();

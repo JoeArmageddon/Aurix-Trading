@@ -14,7 +14,8 @@ class MarketStreamService {
   private isConnecting = false;
   private priceHistory: Map<string, number[]> = new Map();
   private readonly maxHistoryLength = 100;
-  private boundHandlers = new Map<string, (...args: unknown[]) => void>();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private boundHandlers = new Map<string, any>();
 
   async start(): Promise<void> {
     if (this.isRunning) return;
