@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aurix - Complete Deployment & Usage Guide</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #e2e8f0;
+            background: #0B0F14;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        header {
+            text-align: center;
+            padding: 3rem 0;
+            border-bottom: 1px solid #2A2F35;
+            margin-bottom: 2rem;
+        }
+        
+        .logo {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #14B8A6, #0D9488);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 0 30px rgba(20, 184, 166, 0.3);
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, #14B8A6, #5EEAD4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .subtitle {
+            color: #94a3b8;
+            font-size: 1.1rem;
+        }
+        
+        h2 {
+            color: #14B8A6;
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid #2A2F35;
+        }
+        
+        h3 {
+            color: #5EEAD4;
+            margin-top: 1.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+        }
+        
+        h4 {
+            color: #94a3b8;
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: #cbd5e1;
+        }
+        
+        .toc {
+            background: #1A1F26;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            border: 1px solid #2A2F35;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+            color: #14B8A6;
+        }
+        
+        .toc ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .toc li {
+            margin: 0.5rem 0;
+        }
+        
+        .toc a {
+            color: #94a3b8;
+            text-decoration: none;
+            transition: color 0.2s;
+        }
+        
+        .toc a:hover {
+            color: #14B8A6;
+        }
+        
+        code {
+            background: #1A1F26;
+            padding: 0.2rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 0.9rem;
+            color: #5EEAD4;
+            border: 1px solid #2A2F35;
+        }
+        
+        pre {
+            background: #1A1F26;
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid #2A2F35;
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            border: none;
+            color: #e2e8f0;
+        }
+        
+        .code-block {
+            position: relative;
+        }
+        
+        .copy-btn {
+            position: absolute;
+            top: 0.5rem;
+            right: 0.5rem;
+            background: #2A2F35;
+            border: none;
+            color: #94a3b8;
+            padding: 0.25rem 0.75rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+        
+        .copy-btn:hover {
+            background: #3A3F45;
+            color: #14B8A6;
+        }
+        
+        .warning {
+            background: rgba(245, 158, 11, 0.1);
+            border-left: 4px solid #F59E0B;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .warning strong {
+            color: #F59E0B;
+        }
+        
+        .info {
+            background: rgba(20, 184, 166, 0.1);
+            border-left: 4px solid #14B8A6;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .info strong {
+            color: #14B8A6;
+        }
+        
+        .danger {
+            background: rgba(239, 68, 68, 0.1);
+            border-left: 4px solid #EF4444;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .danger strong {
+            color: #EF4444;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: #1A1F26;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid #2A2F35;
+        }
+        
+        th {
+            background: #252B33;
+            color: #14B8A6;
+            font-weight: 600;
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .step {
+            display: flex;
+            margin: 1.5rem 0;
+            gap: 1rem;
+        }
+        
+        .step-number {
+            width: 32px;
+            height: 32px;
+            background: #14B8A6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            flex-shrink: 0;
+        }
+        
+        .step-content {
+            flex: 1;
+        }
+        
+        .step-content h4 {
+            margin-top: 0;
+            color: #e2e8f0;
+        }
+        
+        .feature-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        
+        .feature-card {
+            background: #1A1F26;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 1px solid #2A2F35;
+        }
+        
+        .feature-card h4 {
+            color: #14B8A6;
+            margin-top: 0;
+        }
+        
+        .checklist {
+            list-style: none;
+            padding-left: 0;
+        }
+        
+        .checklist li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        
+        .checklist li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #14B8A6;
+            font-weight: bold;
+        }
+        
+        .endpoint {
+            background: #252B33;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 0.5rem 0;
+            font-family: monospace;
+        }
+        
+        .method {
+            display: inline-block;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        .method.get { background: #10B981; color: white; }
+        .method.post { background: #3B82F6; color: white; }
+        .method.put { background: #F59E0B; color: white; }
+        .method.delete { background: #EF4444; color: white; }
+        
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid #2A2F35;
+            margin-top: 3rem;
+            color: #64748b;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: #14B8A6;
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.3s;
+            border: none;
+            font-size: 1.5rem;
+        }
+        
+        .back-to-top.visible {
+            opacity: 1;
+        }
+        
+        .back-to-top:hover {
+            background: #0D9488;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 1.75rem;
+            }
+            
+            .step {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">A</div>
+            <h1>Aurix Deployment & Usage Guide</h1>
+            <p class="subtitle">Complete guide for deploying and using your AI Trading Co-Pilot</p>
+        </header>
+
+        <nav class="toc">
+            <h3>📚 Table of Contents</h3>
+            <ul>
+                <li><a href="#overview">1. Overview & Architecture</a></li>
+                <li><a href="#prerequisites">2. Prerequisites</a></li>
+                <li><a href="#local-setup">3. Local Development Setup</a></li>
+                <li><a href="#external-services">4. External Services Configuration</a></li>
+                <li><a href="#environment-variables">5. Environment Variables</a></li>
+                <li><a href="#deployment">6. Production Deployment</a></li>
+                <li><a href="#usage">7. Using Aurix</a></li>
+                <li><a href="#api-reference">8. API Reference</a></li>
+                <li><a href="#troubleshooting">9. Troubleshooting</a></li>
+                <li><a href="#security">10. Security Best Practices</a></li>
+            </ul>
+        </nav>
+
+        <section id="overview">
+            <h2>1. Overview & Architecture</h2>
+            
+            <p>Aurix is a full-stack AI-powered trading platform with the following architecture:</p>
+            
+            <div class="feature-list">
+                <div class="feature-card">
+                    <h4>📊 Real-time Data</h4>
+                    <p>WebSocket streaming for top 10 cryptocurrencies via Binance</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🇮🇳 Indian Markets</h4>
+                    <p>NIFTY 50 stocks with 60-second polling via Yahoo Finance</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🤖 AI Analysis</h4>
+                    <p>Gemini + Groq for market insights and daily reports</p>
+                </div>
+                <div class="feature-card">
+                    <h4>📈 Sentiment Engine</h4>
+                    <p>Reddit, Twitter, and Fear & Greed aggregation</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🐋 On-Chain</h4>
+                    <p>Whale alerts and exchange flow monitoring</p>
+                </div>
+                <div class="feature-card">
+                    <h4>🔔 Smart Alerts</h4>
+                    <p>Condition-based notifications with email support</p>
+                </div>
+            </div>
+
+            <h3>Tech Stack</h3>
+            <table>
+                <tr>
+                    <th>Layer</th>
+                    <th>Technology</th>
+                    <th>Purpose</th>
+                </tr>
+                <tr>
+                    <td>Frontend</td>
+                    <td>Next.js 14 + TypeScript</td>
+                    <td>React App with App Router</td>
+                </tr>
+                <tr>
+                    <td>Styling</td>
+                    <td>TailwindCSS + Shadcn UI</td>
+                    <td>Dark theme UI components</td>
+                </tr>
+                <tr>
+                    <td>State</td>
+                    <td>Zustand</td>
+                    <td>Global state management</td>
+                </tr>
+                <tr>
+                    <td>Backend</td>
+                    <td>Fastify + TypeScript</td>
+                    <td>High-performance API server</td>
+                </tr>
+                <tr>
+                    <td>Database</td>
+                    <td>Firebase Firestore</td>
+                    <td>Document storage</td>
+                </tr>
+                <tr>
+                    <td>Cache</td>
+                    <td>Upstash Redis</td>
+                    <td>Real-time data caching</td>
+                </tr>
+                <tr>
+                    <td>Auth</td>
+                    <td>Firebase Auth</td>
+                    <td>User authentication</td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="prerequisites">
+            <h2>2. Prerequisites</h2>
+            
+            <h3>Required Software</h3>
+            <ul class="checklist">
+                <li>Node.js 18+ (LTS recommended)</li>
+                <li>pnpm 8+ (package manager)</li>
+                <li>Git (version control)</li>
+            </ul>
+
+            <h3>Required Accounts (Free Tiers Available)</h3>
+            <table>
+                <tr>
+                    <th>Service</th>
+                    <th>Purpose</th>
+                    <th>Free Tier Limits</th>
+                </tr>
+                <tr>
+                    <td>Firebase</td>
+                    <td>Auth + Firestore</td>
+                    <td>50K reads/day, 1GB storage</td>
+                </tr>
+                <tr>
+                    <td>Upstash Redis</td>
+                    <td>Caching layer</td>
+                    <td>10K commands/day</td>
+                </tr>
+                <tr>
+                    <td>Google AI Studio</td>
+                    <td>Gemini API</td>
+                    <td>60 requests/minute</td>
+                </tr>
+                <tr>
+                    <td>Resend</td>
+                    <td>Email delivery</td>
+                    <td>100 emails/day</td>
+                </tr>
+                <tr>
+                    <td>Groq</td>
+                    <td>AI fallback</td>
+                    <td>1M tokens/day</td>
+                </tr>
+            </table>
+
+            <div class="info">
+                <strong>💡 Tip:</strong> All services offer generous free tiers sufficient for development and small-scale production use.
+            </div>
+        </section>
+
+        <section id="local-setup">
+            <h2>3. Local Development Setup</h2>
+
+            <div class="step">
+                <div class="step-number">1</div>
+                <div class="step-content">
+                    <h4>Clone the Repository</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>git clone https://github.com/yourusername/aurix.git
+cd aurix</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">2</div>
+                <div class="step-content">
+                    <h4>Install Dependencies</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>pnpm install</code></pre>
+                    </div>
+                    <p>This installs all dependencies for both frontend and backend using pnpm workspaces.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">3</div>
+                <div class="step-content">
+                    <h4>Configure Environment Variables</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Frontend environment
+cp .env.example apps/web/.env.local
+
+# Backend environment
+cp .env.example apps/server/.env</code></pre>
+                    </div>
+                    <p>See Section 5 for detailed environment variable configuration.</p>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">4</div>
+                <div class="step-content">
+                    <h4>Build Shared Packages</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code>pnpm --filter @aurix/types build
+pnpm --filter @aurix/utils build</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">5</div>
+                <div class="step-content">
+                    <h4>Start Development Servers</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Start both frontend and backend
+pnpm dev
+
+# Or start individually:
+pnpm --filter @aurix/web dev      # Frontend: http://localhost:3000
+pnpm --filter @aurix/server dev   # Backend: http://localhost:3001</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-number">6</div>
+                <div class="step-content">
+                    <h4>Verify Installation</h4>
+                    <div class="code-block">
+                        <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                        <pre><code># Test backend health
+curl http://localhost:3001/health
+
+# Expected response:
+{
+  "status": "ok",
+  "timestamp": "2024-01-...",
+  "services": {
+    "redis": "connected",
+    "firebase": "connected",
+    "marketStream": "running"
+  }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="external-services">
+            <h2>4. External Services Configuration</h2>
+
+            <h3>Firebase Setup</h3>
+            <ol>
+                <li>Go to <a href="https://console.firebase.google.com" style="color: #14B8A6;">Firebase Console</a></li>
+                <li>Create a new project (e.g., "aurix-trading")</li>
+                <li>Enable Authentication (Email/Password provider)</li>
+                <li>Create a Firestore database in native mode</li>
+                <li>Go to Project Settings → Service Accounts</li>
+                <li>Generate new private key (for backend)</li>
+                <li>Note down the project ID and client email</li>
+            </ol>
+
+            <h3>Upstash Redis Setup</h3>
+            <ol>
+                <li>Go to <a href="https://console.upstash.com" style="color: #14B8A6;">Upstash Console</a></li>
+                <li>Create a new database</li>
+                <li>Select the region closest to your users</li>
+                <li>Copy the REST URL and token</li>
+            </ol>
+
+            <h3>Google AI (Gemini) Setup</h3>
+            <ol>
+                <li>Go to <a href="https://makersuite.google.com/app/apikey" style="color: #14B8A6;">Google AI Studio</a></li>
+                <li>Create a new API key</li>
+                <li>Copy the key for your environment variables</li>
+            </ol>
+
+            <h3>Resend Email Setup</h3>
+            <ol>
+                <li>Go to <a href="https://resend.com" style="color: #14B8A6;">Resend</a></li>
+                <li>Sign up and verify your domain</li>
+                <li>Generate an API key</li>
+                <li>Configure sender email (e.g., alerts@yourdomain.com)</li>
+            </ol>
+
+            <h3>Groq Setup (Optional)</h3>
+            <ol>
+                <li>Go to <a href="https://console.groq.com" style="color: #14B8A6;">Groq Console</a></li>
+                <li>Create an API key for AI fallback</li>
+            </ol>
+        </section>
+
+        <section id="environment-variables">
+            <h2>5. Environment Variables</h2>
+
+            <h3>Frontend (.env.local)</h3>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre><code># Firebase Configuration
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=123456789
+NEXT_PUBLIC_FIREBASE_APP_ID=1:123456789:web:abcdef
+
+# Backend API
+NEXT_PUBLIC_API_URL=http://localhost:3001
+NEXT_PUBLIC_WS_URL=ws://localhost:3001/ws</code></pre>
+            </div>
+
+            <h3>Backend (.env)</h3>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre><code># Server
+PORT=3001
+NODE_ENV=development
+JWT_SECRET=your-super-secret-jwt-key-change-in-production
+
+# Binance
+BINANCE_WS_URL=wss://stream.binance.com:9443/ws
+
+# AI APIs
+GEMINI_API_KEY=your_gemini_api_key
+GROQ_API_KEY=your_groq_api_key
+
+# Upstash Redis
+UPSTASH_REDIS_URL=https://your-redis-url.upstash.io
+UPSTASH_REDIS_TOKEN=your_redis_token
+
+# Firebase Admin
+FIREBASE_PROJECT_ID=your_project_id
+FIREBASE_CLIENT_EMAIL=firebase-adminsdk-xxxxx@your_project.iam.gserviceaccount.com
+FIREBASE_PRIVATE_KEY="-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----\n"
+
+# Resend Email
+RESEND_API_KEY=re_xxxxxxxx
+
+# Optional APIs
+WHALE_ALERT_API_KEY=your_whale_alert_key
+YAHOO_API_KEY=</code></pre>
+            </div>
+
+            <div class="warning">
+                <strong>⚠️ Important:</strong> Never commit your .env files to version control. They contain sensitive credentials.
+            </div>
+        </section>
+
+        <section id="deployment">
+            <h2>6. Production Deployment</h2>
+
+            <h3>Option A: Vercel (Frontend) + Railway (Backend)</h3>
+
+            <h4>Deploy Frontend to Vercel</h4>
+            <ol>
+                <li>Push code to GitHub</li>
+                <li>Go to <a href="https://vercel.com" style="color: #14B8A6;">Vercel</a></li>
+                <li>Import your repository</li>
+                <li>Root Directory: <code>apps/web</code></li>
+                <li>Build Command: <code>cd ../.. && pnpm install && pnpm --filter @aurix/web build</code></li>
+                <li>Add environment variables from .env.local</li>
+                <li>Update NEXT_PUBLIC_API_URL to your backend URL</li>
+            </ol>
+
+            <h4>Deploy Backend to Railway</h4>
+            <ol>
+                <li>Go to <a href="https://railway.app" style="color: #14B8A6;">Railway</a></li>
+                <li>New Project → Deploy from GitHub repo</li>
+                <li>Set root directory: <code>apps/server</code></li>
+                <li>Add all environment variables from .env</li>
+                <li>Add healthcheck path: <code>/health</code></li>
+                <li>Generate domain or add custom domain</li>
+            </ol>
+
+            <h3>Option B: Render (Full Stack)</h3>
+
+            <h4>Web Service (Frontend)</h4>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre><code>Build Command: pnpm install && pnpm --filter @aurix/web build
+Start Command: pnpm --filter @aurix/web start
+Root Directory: apps/web</code></pre>
+            </div>
+
+            <h4>Web Service (Backend)</h4>
+            <div class="code-block">
+                <button class="copy-btn" onclick="copyCode(this)">Copy</button>
+                <pre><code>Build Command: pnpm install && pnpm --filter @aurix/server build
+Start Command: pnpm --filter @aurix/server start
+Root Directory: apps/server</code></pre>
+            </div>
+
+            <h3>Post-Deployment Checklist</h3>
+            <ul class="checklist">
+                <li>Update CORS settings in backend with production URLs</li>
+                <li>Configure Firebase authorized domains</li>
+                <li>Verify Redis connection in production</li>
+                <li>Test email delivery with Resend</li>
+                <li>Check WebSocket connectivity</li>
+                <li>Monitor error logs in both services</li>
+            </ul>
+        </section>
+
+        <section id="usage">
+            <h2>7. Using Aurix</h2>
+
+            <h3>First Time Setup</h3>
+            <ol>
+                <li>Register a new account at <code>/login</code></li>
+                <li>Verify your email (if configured)</li>
+                <li>Start with Free plan or upgrade to Pro</li>
+            </ol>
+
+            <h3>Dashboard</h3>
+            <p>The dashboard provides:</p>
+            <ul class="checklist">
+                <li>Market Pulse metrics (sentiment, fear & greed)</li>
+                <li>Top crypto asset cards with live prices</li>
+                <li>Quick access to portfolio and alerts</li>
+            </ul>
+
+            <h3>Asset Analysis</h3>
+            <ol>
+                <li>Click on any asset card</li>
+                <li>View detailed metrics (trend, momentum, sentiment, risk)</li>
+                <li>Click "AI Analysis" for AI-powered insights</li>
+                <li>Check market data and on-chain signals</li>
+            </ol>
+
+            <h3>Portfolio Management</h3>
+            <ol>
+                <li>Go to Portfolio page</li>
+                <li>Click "Add Position"</li>
+                <li>Enter asset symbol, entry price, and quantity</li>
+                <li>Track PnL in real-time</li>
+                <li>Monitor risk score and warnings</li>
+            </ol>
+
+            <h3>Creating Alerts</h3>
+            <ol>
+                <li>Go to Alerts page</li>
+                <li>Click "Create Alert"</li>
+                <li>Set conditions (e.g., BTC price > 50,000)</li>
+                <li>Receive email notifications when triggered</li>
+            </ol>
+
+            <h3>Free vs Pro Limits</h3>
+            <table>
+                <tr>
+                    <th>Feature</th>
+                    <th>Free</th>
+                    <th>Pro</th>
+                </tr>
+                <tr>
+                    <td>Watchlist Assets</td>
+                    <td>3</td>
+                    <td>50</td>
+                </tr>
+                <tr>
+                    <td>Active Alerts</td>
+                    <td>2</td>
+                    <td>Unlimited</td>
+                </tr>
+                <tr>
+                    <td>AI Queries/Day</td>
+                    <td>5</td>
+                    <td>Unlimited</td>
+                </tr>
+                <tr>
+                    <td>Portfolio Assets</td>
+                    <td>10</td>
+                    <td>100</td>
+                </tr>
+                <tr>
+                    <td>Daily Reports</td>
+                    <td>❌</td>
+                    <td>✅</td>
+                </tr>
+            </table>
+        </section>
+
+        <section id="api-reference">
+            <h2>8. API Reference</h2>
+
+            <h3>Authentication</h3>
+            <div class="endpoint">
+                <span class="method post">POST</span> /auth/login
+            </div>
+            <p>Login with Firebase ID token</p>
+
+            <div class="endpoint">
+                <span class="method post">POST</span> /auth/register
+            </div>
+            <p>Register new user account</p>
+
+            <h3>Market Data</h3>
+            <div class="endpoint">
+                <span class="method get">GET</span> /market/crypto
+            </div>
+            <p>Get all cryptocurrency prices and metrics</p>
+
+            <div class="endpoint">
+                <span class="method get">GET</span> /market/crypto/:symbol
+            </div>
+            <p>Get specific crypto details (e.g., BTC)</p>
+
+            <div class="endpoint">
+                <span class="method get">GET</span> /market/pulse
+            </div>
+            <p>Get market pulse metrics</p>
+
+            <h3>Portfolio</h3>
+            <div class="endpoint">
+                <span class="method get">GET</span> /portfolio
+            </div>
+            <p>Get user's portfolio with PnL</p>
+
+            <div class="endpoint">
+                <span class="method post">POST</span> /portfolio
+            </div>
+            <p>Add new position</p>
+
+            <h3>Alerts</h3>
+            <div class="endpoint">
+                <span class="method get">GET</span> /alerts
+            </div>
+            <p>List user alerts</p>
+
+            <div class="endpoint">
+                <span class="method post">POST</span> /alerts
+            </div>
+            <p>Create new alert</p>
+
+            <h3>AI</h3>
+            <div class="endpoint">
+                <span class="method post">POST</span> /ai/analyze
+            </div>
+            <p>Analyze asset with AI</p>
+
+            <div class="endpoint">
+                <span class="method get">GET</span> /ai/reports
+            </div>
+            <p>Get AI reports (Pro only)</p>
+        </section>
+
+        <section id="troubleshooting">
+            <h2>9. Troubleshooting</h2>
+
+            <h3>Common Issues</h3>
+
+            <h4>Build Errors</h4>
+            <div class="danger">
+                <strong>Error:</strong> Cannot find module '@aurix/types'
+            </div>
+            <p><strong>Solution:</strong> Build shared packages first</p>
+            <div class="code-block">
+                <pre><code>pnpm --filter @aurix/types build
+pnpm --filter @aurix/utils build</code></pre>
+            </div>
+
+            <h4>Redis Connection Failed</h4>
+            <div class="danger">
+                <strong>Error:</strong> Redis connection refused
+            </div>
+            <p><strong>Solution:</strong> Check UPSTASH_REDIS_URL and token. Ensure using correct format.</p>
+
+            <h4>Firebase Auth Errors</h4>
+            <div class="danger">
+                <strong>Error:</strong> Firebase App already initialized
+            </div>
+            <p><strong>Solution:</strong> This is a warning, not an error. The app handles multiple initializations.</p>
+
+            <h4>CORS Errors</h4>
+            <div class="danger">
+                <strong>Error:</strong> CORS policy blocked request
+            </div>
+            <p><strong>Solution:</strong> Update CORS config in apps/server/src/index.ts with your domain</p>
+
+            <h4>WebSocket Disconnections</h4>
+            <div class="warning">
+                <strong>Warning:</strong> WebSocket keeps reconnecting
+            </div>
+            <p><strong>Solution:</strong> Check firewall settings. Ensure WebSocket URL is correct.</p>
+
+            <h3>Debug Mode</h3>
+            <p>Enable debug logging:</p>
+            <div class="code-block">
+                <pre><code># Backend
+DEBUG=* pnpm --filter @aurix/server dev
+
+# Frontend
+NEXT_PUBLIC_DEBUG=true pnpm --filter @aurix/web dev</code></pre>
+            </div>
+        </section>
+
+        <section id="security">
+            <h2>10. Security Best Practices</h2>
+
+            <ul class="checklist">
+                <li>Never commit .env files to git</li>
+                <li>Use strong JWT secrets (32+ characters)</li>
+                <li>Enable Firebase App Check for production</li>
+                <li>Rate limit API endpoints (configured by default)</li>
+                <li>Validate all user inputs with Zod schemas</li>
+                <li>Use HTTPS in production</li>
+                <li>Regularly rotate API keys</li>
+                <li>Monitor Firebase Auth for suspicious activity</li>
+                <li>Set up Redis password/token rotation</li>
+            </ul>
+
+            <div class="info">
+                <strong>🔒 Security Note:</strong> The application implements rate limiting, input validation, and proper CORS configuration by default. Always keep dependencies updated.
+            </div>
+        </section>
+
+        <footer>
+            <p>Aurix - Your AI Trading Co-Pilot</p>
+            <p style="margin-top: 0.5rem; font-size: 0.9rem;">Built with ❤️ for traders worldwide</p>
+        </footer>
+    </div>
+
+    <button class="back-to-top" id="backToTop" onclick="scrollToTop()">↑</button>
+
+    <script>
+        // Copy code functionality
+        function copyCode(btn) {
+            const code = btn.nextElementSibling.textContent;
+            navigator.clipboard.writeText(code);
+            btn.textContent = 'Copied!';
+            setTimeout(() => btn.textContent = 'Copy', 2000);
+        }
+
+        // Back to top button
+        const backToTop = document.getElementById('backToTop');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 500) {
+                backToTop.classList.add('visible');
+            } else {
+                backToTop.classList.remove('visible');
+            }
+        });
+
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
