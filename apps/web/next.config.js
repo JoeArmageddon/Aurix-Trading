@@ -8,8 +8,12 @@ const nextConfig = {
   images: {
     domains: ['localhost'],
   },
+  experimental: {
+    // Enable ESM externals to handle modern packages
+    esmExternals: true,
+  },
   webpack: (config, { isServer }) => {
-    // Handle undici and other node-specific modules
+    // Handle node-specific modules on client side
     if (!isServer) {
       config.resolve.fallback = {
         ...config.resolve.fallback,
@@ -21,24 +25,7 @@ const nextConfig = {
       };
     }
 
-    // Add rule to transpile undici and firebase with babel
-    config.module.rules.unshift({
-      test: /\.(js|mjs)$/,
-      include: [
-        /node_modules[\\/]undici/,
-        /node_modules[\\/]@firebase/,
-        /node_modules[\\/]firebase/,
-      ],
-      use: {
-        loader: 'babel-loader',
-        options: {
-          presets: ['next/babel'],
-          cacheDirectory: true,
-        },
-      },
-    });
-
-    // Support for native node modules
+    // Exclude native node modules from client bundle
     config.externals = config.externals || [];
     if (!isServer) {
       config.externals.push(
